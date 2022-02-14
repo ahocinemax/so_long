@@ -18,6 +18,8 @@
 # include <stdio.h>
 # include <string.h>
 
+# define			_STD_OUT
+
 typedef struct s_list
 {
 	void			*content;
