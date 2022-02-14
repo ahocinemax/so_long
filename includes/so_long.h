@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <math.h>
 # include "../libft/libft.h"
+# include "../"
 
 typedef struct s_move
 {

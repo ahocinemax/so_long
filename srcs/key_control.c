@@ -33,20 +33,6 @@ void	ft_init_struct(t_sl *sl)
 	sl->resol.width = 900;
 }
 
-void	ft_check_args(t_sl *sl, char **argv)
-{
-	int	i;
-
-	i = 0;
-	if (ft_strlen(*argv) < 4)
-		return ;
-	while (*argv[4])
-		*(argv++);
-	sl->ext = *argv;
-	if (ft_strncmp(".ber", sl->ext, 4))
-		return ;
-}
-
 void	ft_init_resol(t_sl *sl)
 {
 	int	max_x;
@@ -96,11 +82,6 @@ void	ft_fill_map(int fd, t_sl *sl)
 	ft_check_inside_map(sl->map.map, sl->map, sl);
 }
 
-int	ft_char_valid(char c)
-{
-	return (c == '1' || c == '0' || c == 'C' || c == 'E' || c == 'P');
-}
-
 void	ft_search_player(t_sl *sl)
 {
 	int	x;
@@ -125,37 +106,6 @@ void	ft_search_player(t_sl *sl)
 		}
 		x++;
 	}
-}
-
-void	ft_check_end_game(t_sl sl)
-{
-	if (sl.sprite_nb)
-		return ;
-}
-
-int	ft_check_border_map(char **map, t_map m)
-{
-	int	x_max;
-	int	y_max;
-	int	i;
-
-	i = 0;
-	x_max = m.large;
-	y_max = m.longu;
-	while (i < x_max)
-	{
-		if (map[0][i] != '1' || map[x_max - 1][i] != '1')
-			return (-1);
-		i++;
-	}
-	i = 0;
-	while (i < y_max)
-	{
-		if (map[i][0] != '1' || map[i][y_max - 1] != '1')
-			return (-1);
-		i++;
-	}
-	return (0);
 }
 
 void	ft_size_map(int fd, t_sl *sl)
@@ -190,32 +140,6 @@ int	ft_nb_elements(int p, int c, int e)
 		;
 }
 
-int	ft_check_inside_map(char **map, t_map m, t_sl *sl)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < m.large)
-	{
-		y = 0;
-		while (y < m.longu)
-		{
-			if (!ft_char_valid(map[x][y]))
-				return (-1);
-			if (map[x][y] == 'P')
-				sl->nb_p++;
-			else if (map[x][y] == 'C')
-				sl->nb_c++;
-			else if (map[x][y] == 'E')
-				sl->nb_e++;
-			y++;
-		}
-		x++;
-	}
-	ft_nb_elements(sl->nb_p, sl->nb_c, sl->nb_e);
-}
-
 int	ft_key_control(int key, t_sl *sl)
 {
 	sl->speed_move = 0.2;
@@ -228,7 +152,7 @@ int	ft_key_control(int key, t_sl *sl)
 	else if (key == KEY_D)
 		sl->move.right = 1;
 	else if (key == KEY_ESC)
-		close_cross(sl);
+		ft_close_cross(sl);
 	return (0);
 }
 
@@ -244,7 +168,7 @@ int	ft_key_control2(int key, t_sl *sl)
 	else if (key == KEY_D)
 		sl->move.right = 0;
 	else if (key == KEY_ESC)
-		close_cross(sl);
+		ft_close_cross(sl);
 	return (0);
 }
 
@@ -262,6 +186,8 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (EXIT_FAILURE);
 	argv++;
+	ft_init_struct(&sl);
+	ft_init_resol(&sl);
 	ft_check_args(&sl, argv);
 	fd = open(*argv, O_RDONLY);
 	if (fd == -1)
