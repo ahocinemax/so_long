@@ -18,7 +18,7 @@
 # include <stdio.h>
 # include <math.h>
 
-typedef struct	s_move
+typedef struct s_move
 {
 	int					av;
 	int					left;
@@ -26,7 +26,7 @@ typedef struct	s_move
 	int					right;
 }						t_move;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	int					x;
 	int					y;
@@ -35,7 +35,13 @@ typedef struct	s_map
 	char				**map;
 }				t_map;
 
-typedef struct	s_player
+typedef struct s_resol
+{
+	int					height;
+	int					width;
+}				t_resol;
+
+typedef struct s_player
 {
 	int					x;
 	int					y;
@@ -43,13 +49,15 @@ typedef struct	s_player
 	int					j;
 }				t_player;
 
-
-typedef struct	s_sl
+typedef struct s_sl
 {
 	double				speed_move;
+	int					sprite_nb;
+	char				*ext;
 	int					nb_c;
 	int					nb_e;
 	int					nb_p;
+	t_resol				resol;
 	t_player			player;
 	t_move				move;
 	t_map				map;
