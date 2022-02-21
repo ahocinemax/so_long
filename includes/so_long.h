@@ -19,13 +19,19 @@
 # include <math.h>
 # include "../libft/libft.h"
 
+# define KEY_ESC		65307
+# define KEY_W			119
+# define KEY_A			97
+# define KEY_S			115
+# define KEY_D			100
+
 typedef struct s_move
 {
 	int					av;
 	int					left;
 	int					arr;
 	int					right;
-}						t_move;
+}				t_move;
 
 typedef struct s_map
 {
@@ -63,11 +69,5 @@ typedef struct s_sl
 	t_move				move;
 	t_map				map;
 }				t_sl;
-
-# define KEY_ESC		65307
-# define KEY_W			119
-# define KEY_A			97
-# define KEY_S			115
-# define KEY_D			100
 
 #endif
