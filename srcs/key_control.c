@@ -12,33 +12,7 @@
 
 #include "../includes/so_long.h"
 
-void	ft_search_player(t_sl *sl)
-{
-	int	x;
-	int	y;
-
-	x = 1;
-	while (x < sl->map.large)
-	{
-		y = 1;
-		while (y < sl->map.longu)
-		{
-			if (sl->map.map[x][y] == 'P')
-			{
-				sl->player.i = x;
-				sl->player.x = x;
-				sl->player.j = y;
-				sl->player.y = y;
-			}
-			else if (sl->map.map[x][y] == 'C')
-				sl->sprite_nb++;
-			y++;
-		}
-		x++;
-	}
-}
-
-int	ft_nb_elements(int p, int c, int e)
+int	ft_check_nb_elements(int p, int c, int e)
 {
 	if (!p)
 		;

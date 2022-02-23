@@ -62,7 +62,23 @@ typedef struct s_pixel
 	float				case_h;
 	float				case_w;
 	float				right_pxl;
-}				t_sprt;
+}				t_pixel;
+
+typedef struct s_image
+{
+	void				*img;
+	char				*address;
+	int					bpx;
+	int					line_l;
+	int					endian;
+}				t_image;
+
+typedef struct s_texture
+{
+	int					width;
+	int					height;
+	t_image				img;
+}				t_texture;
 
 typedef struct s_color
 {
@@ -74,8 +90,15 @@ typedef struct s_color
 
 typedef struct s_sl
 {
-	t_resol				resol;
+	t_texture			game;
+	t_texture			wall;
+	t_texture			door1;
+	t_texture			door2;
+	t_texture			back;
 	t_player			player;
+	t_resol				resol;
+	t_pixel				iend;
+	t_pixel				el;
 	t_move				move;
 	t_map				map;
 	double				speed_move;
