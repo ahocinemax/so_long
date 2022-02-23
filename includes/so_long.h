@@ -70,7 +70,7 @@ typedef struct s_color
 	int					g;
 	int					b;
 	int					hex;
-};
+}				t_color;
 
 typedef struct s_sl
 {
