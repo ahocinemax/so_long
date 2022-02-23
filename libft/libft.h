@@ -18,7 +18,7 @@
 # include <stdio.h>
 # include <string.h>
 
-# define			_STD_OUT
+# define	_STD_OUT	1
 
 typedef struct s_list
 {

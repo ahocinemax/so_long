@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <math.h>
+# include <mlx.h>
 # include "../libft/libft.h"
 
 # define KEY_ESC		65307
@@ -56,18 +57,35 @@ typedef struct s_player
 	int					j;
 }				t_player;
 
+typedef struct s_pixel
+{
+	float				case_h;
+	float				case_w;
+	float				right_pxl;
+}				t_sprt;
+
+typedef struct s_color
+{
+	int					r;
+	int					g;
+	int					b;
+	int					hex;
+};
+
 typedef struct s_sl
 {
-	double				speed_move;
-	int					sprite_nb;
-	char				*ext;
-	int					nb_c;
-	int					nb_e;
-	int					nb_p;
 	t_resol				resol;
 	t_player			player;
 	t_move				move;
 	t_map				map;
+	double				speed_move;
+	int					sprite_nb;
+	void				*mlx_ptr;
+	void				*win_ptr;
+	char				*ext;
+	int					nb_c;
+	int					nb_e;
+	int					nb_p;
 }				t_sl;
 
 #endif
