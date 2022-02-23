@@ -111,4 +111,22 @@ typedef struct s_sl
 	int					nb_p;
 }				t_sl;
 
+int		ft_check_inside_map(char **map, t_map m, t_sl *sl);
+int		ft_check_nb_elements(int p, int c, int e);
+int		ft_check_border_map(char **map, t_map m);
+void	ft_check_args(t_sl *sl, char **argv);
+int		ft_key_control2(int key, t_sl *sl);
+int		ft_key_control(int key, t_sl *sl);
+void	ft_size_map(int fd, t_sl *sl);
+void	ft_fill_map(int fd, t_sl *sl);
+void	ft_search_player(t_sl *sl);
+void	ft_check_end_game(t_sl sl);
+void	ft_init_texture(t_sl *sl);
+void	ft_init_struct(t_sl *sl);
+int		ft_close_cross(t_sl *sl);
+void	ft_init_resol(t_sl *sl);
+void	ft_start_game(t_sl *sl);
+void	ft_init_draw(t_sl *sl);
+int		ft_char_valid(char c);
+
 #endif
