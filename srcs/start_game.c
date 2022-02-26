@@ -12,6 +12,16 @@
 
 #include "../includes/so_long.h"
 
+void	ft_play(t_sl *sl)
+{
+	if (!sl.win && !sl.loose && sl.point && sl.moove < 56)
+	{
+		ft_put_elements(sl);
+		
+	}
+	return ;
+}
+
 void	ft_search_player(t_sl *sl)
 {
 	int	x;
@@ -64,10 +74,10 @@ void	ft_init_texture(t_sl *sl)
 		&sl->door2.width, &sl->door2.height);
 	sl->door2.img.address = mlx_get_data_addr(sl->door2.img.img, \
 		&sl->door2.img.bpx, &sl->door2.img.line_l, &sl->door2.img.endian);
-	sl->back.img.img = mlx_xpm_file_to_image(sl->mlx_ptr, "./img/back.xpm", \
-		&sl->back.width, &sl->back.height);
-	sl->back.img.address = mlx_get_data_addr(sl->back.img.img, \
-		&sl->back.img.bpx, &sl->back.img.line_l, &sl->back.img.endian);
+	sl->bg.img.img = mlx_xpm_file_to_image(sl->mlx_ptr, "./img/bg.xpm", \
+		&sl->bg.width, &sl->bg.height);
+	sl->bg.img.address = mlx_get_data_addr(sl->bg.img.img, \
+		&sl->bg.img.bpx, &sl->bg.img.line_l, &sl->bg.img.endian);
 }
 
 void	ft_start_game(t_sl *sl)

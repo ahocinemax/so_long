@@ -14,23 +14,31 @@
 
 void	ft_init_struct(t_sl *sl)
 {
-	sl->nb_c = 0;
-	sl->nb_p = 0;
-	sl->nb_e = 0;
-	sl->map.x = 0;
-	sl->map.y = 0;
-	sl->player.x = 0;
-	sl->player.y = 0;
-	sl->map.large = 0;
-	sl->map.longu = 1;
-	sl->move.av = 0;
-	sl->move.arr = 0;
-	sl->move.left = 0;
-	sl->move.right = 0;
-	sl->speed_move = 0;
-	sl->map.map = NULL;
-	sl->resol.height = 900;
-	sl->resol.width = 900;
+	sl->speed_move 			= 0;
+	sl->sprite_nb			= 0;
+	sl->ext 				= NULL;
+	sl->loose 				= 0;
+	sl->nb_c 				= 0;
+	sl->nb_p				= 0;
+	sl->nb_e				= 0;
+	sl->end 				= 0;
+	sl->win 				= 0;
+	sl->map.x				= 0;
+	sl->map.y 				= 0;
+	sl->map.map 			= NULL;
+	sl->map.large 			= 0;
+	sl->map.longu 			= 1;
+	sl->player.x 			= 0;
+	sl->player.y 			= 0;
+	sl->move.av 			= 0;
+	sl->move.arr 			= 0;
+	sl->move.left 			= 0;
+	sl->move.right 			= 0;
+	sl->game.width 			= 0;
+	sl->game.height 		= 0;
+	sl->game.img.address 	= NULL;
+	sl->resol.height 		= 900;
+	sl->resol.width 		= 900;
 }
 
 void	ft_init_resol(t_sl *sl)

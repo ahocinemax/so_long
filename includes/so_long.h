@@ -80,6 +80,15 @@ typedef struct s_texture
 	t_image				img;
 }				t_texture;
 
+typedef struct s_draw
+{
+	float				txture_x;
+	float				txture_y;
+	float				down_pxl;
+	float				top_pxl;
+	float				pos_x;
+}				t_draw;
+
 typedef struct s_color
 {
 	int					r;
@@ -94,39 +103,52 @@ typedef struct s_sl
 	t_texture			wall;
 	t_texture			door1;
 	t_texture			door2;
-	t_texture			back;
+	t_texture			bg;
 	t_player			player;
+	t_image				img;
 	t_resol				resol;
 	t_pixel				iend;
 	t_pixel				el;
 	t_move				move;
+	t_draw				d;
 	t_map				map;
 	double				speed_move;
 	int					sprite_nb;
 	void				*mlx_ptr;
 	void				*win_ptr;
+	int					end;
+	int					loose;
+	int					point;
 	char				*ext;
+	int					move;
 	int					nb_c;
 	int					nb_e;
 	int					nb_p;
+	int					win;
 }				t_sl;
 
-int		ft_check_inside_map(char **map, t_map m, t_sl *sl);
+void    ft_fill_background(t_sl *solong, int i, int j, t_texture *texture);
+void    ft_fill_element(t_sl *solong, int i, int j, t_texture *texture);
+void	ft_draw_bg(t_sl *solong, t_texture *texture, int background);
+int		ft_check_inside_map(char **map, t_map m, t_sl *solong);
 int		ft_check_nb_elements(int p, int c, int e);
 int		ft_check_border_map(char **map, t_map m);
-void	ft_check_args(t_sl *sl, char **argv);
-int		ft_key_control2(int key, t_sl *sl);
-int		ft_key_control(int key, t_sl *sl);
-void	ft_size_map(int fd, t_sl *sl);
-void	ft_fill_map(int fd, t_sl *sl);
-void	ft_search_player(t_sl *sl);
-void	ft_check_end_game(t_sl sl);
-void	ft_init_texture(t_sl *sl);
-void	ft_init_struct(t_sl *sl);
-int		ft_close_cross(t_sl *sl);
-void	ft_init_resol(t_sl *sl);
-void	ft_start_game(t_sl *sl);
-void	ft_init_draw(t_sl *sl);
+void	ft_check_args(t_sl *solong, char **argv);
+int		ft_key_control2(int key, t_sl *solong);
+int		ft_key_control(int key, t_sl *solong);
+void	ft_size_map(int fd, t_sl *solong);
+void	ft_fill_map(int fd, t_sl *solong);
+void	ft_search_player(t_sl *solong);
+void	ft_check_end_game(t_sl solong);
+void	ft_init_texture(t_sl *solong);
+void	ft_init_struct(t_sl *solong);
+int		ft_close_cross(t_sl *solong);
+void	ft_init_resol(t_sl *solong);
+void	ft_start_game(t_sl *solong);
+void	ft_init_draw(t_sl *solong);
+void    ft_init_img(t_sl *solong);
+void    ft_put_elements(void);
 int		ft_char_valid(char c);
+void	ft_play(t_sl *solong);
 
 #endif
