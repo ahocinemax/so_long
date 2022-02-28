@@ -12,10 +12,18 @@
 
 #include "../includes/so_long.h"
 
-void	ft_check_end_game(t_sl sl)
+void	ft_check_end_game(t_sl *sl)
 {
-	if (sl.sprite_nb)
-		return ;
+	if (sl->sprite_nb)
+	{
+		ft_putstr_fd("GAME OVER - TOUS N'A PAS ETE RAMASSE\n", _STD_OUT);
+		sl->loose = 1;
+	}
+	else
+	{
+		ft_putstr_fd("C'EST GAGNE !\n", _STD_OUT);
+		sl->win = 1;
+	}
 }
 
 void	ft_check_args(t_sl *sl, char **argv)
@@ -25,11 +33,12 @@ void	ft_check_args(t_sl *sl, char **argv)
 	i = 0;
 	if (ft_strlen(*argv) < 4)
 		return ;
-	while (*argv[4])
-		*(argv++);
-	sl->ext = *argv;
+	while (*argv[i])
+		i++;
+	sl->ext = ft_substr(*argv, ft_strlen(*argv) - 4, ft_strlen(*argv));
 	if (ft_strncmp(".ber", sl->ext, 4))
 		return ;
+	free(sl->ext);
 }
 
 int	ft_char_valid(char c)
@@ -85,5 +94,5 @@ int	ft_check_inside_map(char **map, t_map m, t_sl *sl)
 		}
 		x++;
 	}
-	ft_nb_elements(sl->nb_p, sl->nb_c, sl->nb_e);
+	ft_check_nb_elements(sl->nb_p, sl->nb_c, sl->nb_e);
 }

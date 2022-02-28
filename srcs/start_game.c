@@ -12,14 +12,17 @@
 
 #include "../includes/so_long.h"
 
-void	ft_play(t_sl *sl)
+int	ft_play(t_sl *sl)
 {
-	if (!sl.win && !sl.loose && sl.point && sl.moove < 56)
+	if (!sl->win && !sl->loose && sl->pv && sl->nb_move < 56)
 	{
 		ft_put_elements(sl);
-		
+		ft_up_down(sl);
+		ft_left_right(sl);
+		mlx_put_image_to_window(sl->mlx_ptr, sl->win_ptr, sl->img.img, 0, 0);
+		mlx_destroy_image(sl->mlx_ptr, sl->img.img);
 	}
-	return ;
+	return (0);
 }
 
 void	ft_search_player(t_sl *sl)
@@ -89,7 +92,7 @@ void	ft_start_game(t_sl *sl)
 	ft_init_texture(sl);
 	mlx_hook(sl->win_ptr, 2, 1L << 0, ft_key_control, sl);
 	mlx_hook(sl->win_ptr, 3, 1L << 0, ft_key_control2, sl);
-	mlx_loop_hook(sl->mlx_ptr, /*ft_play*/NULL, sl);
+	mlx_loop_hook(sl->mlx_ptr, ft_play, sl);
 	mlx_hook(sl->win_ptr, 33, 1L, ft_close_cross, sl);
 	mlx_loop(sl->mlx_ptr);
 	return ;
