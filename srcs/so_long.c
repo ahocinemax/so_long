@@ -15,7 +15,7 @@
 void	ft_init_struct(t_sl *sl)
 {
 	sl->speed_move = 0;
-	sl->sprite_nb = 0;
+	sl->nb_sprite = 0;
 	sl->nb_move = 0;
 	sl->ext = NULL;
 	sl->loose = 0;

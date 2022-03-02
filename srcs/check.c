@@ -14,7 +14,7 @@
 
 void	ft_check_end_game(t_sl *sl)
 {
-	if (sl->sprite_nb)
+	if (sl->nb_sprite)
 	{
 		ft_putstr_fd("GAME OVER - TOUS N'A PAS ETE RAMASSE\n", _STD_OUT);
 		sl->loose = 1;

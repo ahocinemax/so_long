@@ -18,24 +18,35 @@
 # include <stdio.h>
 # include <string.h>
 
-# define	_STD_OUT	1
+# ifndef _STD_OUT
+#  define _STD_OUT	1
+# endif
+
+# ifndef _STD_ERR
+#  define _STD_ERR	1
+# endif
 
 typedef struct s_list
 {
-	void			*content;
+	int				content;
 	struct s_list	*next;
+	int				index;
+	struct s_list	*prev;
+	int				keep;
 }					t_list;
 
 /*	Linked lists	*/
-t_list	*ft_lstnew(void *content);
+t_list	*ft_lstnew(int content);
 void	ft_lstadd_front(t_list **alst, t_list *new);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **alst, t_list *new);
-void	ft_lstdelone(t_list *lst, void (*del)(void*));
-void	ft_lstclear(t_list **lst, void (*del)(void*));
-void	ft_lstiter(t_list *lst, void (*f)(void *));
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+void	ft_lstdelone(t_list *lst, void (*del)(int));
+void	ft_lstclear(t_list **lst, void (*del)(int));
+void	ft_lstiter(t_list *lst, void (*f)(int));
+t_list	*ft_lstmap(t_list *lst, void *(*f)(int), void (*del)(int));
+int		ft_is_sort(t_list *lst);
+void	ft_lstprint(t_list *lst);
 
 /*	Mandatory		*/
 void	*ft_memset(void *dest, int c, size_t len);
@@ -56,6 +67,7 @@ int		ft_tolower(int c);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strcmp(char *s1, char *s2);
 size_t	ft_strlcpy(char *dst, const char *src, size_t n);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 char	*ft_strnstr(const char *big, const char	*little, size_t len);
@@ -66,6 +78,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(const char *str, char charset);
+void	ft_free_all2(char **split);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));

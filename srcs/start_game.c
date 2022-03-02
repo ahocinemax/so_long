@@ -44,7 +44,7 @@ void	ft_search_player(t_sl *sl)
 				sl->player.y = y;
 			}
 			else if (sl->map.map[x][y] == 'C')
-				sl->sprite_nb++;
+				sl->nb_sprite++;
 			y++;
 		}
 		x++;
@@ -73,6 +73,11 @@ void	ft_init_texture(t_sl *sl)
 		&sl->door1.width, &sl->door1.height);
 	sl->door1.img.address = mlx_get_data_addr(sl->door1.img.img, \
 		&sl->door1.img.bpx, &sl->door1.img.line_l, &sl->door1.img.endian);
+	sl->collectible.img.img = mlx_xpm_file_to_image(sl->mlx_ptr, "./img/collectible.xpm", \
+		&sl->collectible.width, &sl->collectible.height);
+	sl->collectible.img.address = mlx_get_data_addr(sl->collectible.img.img, \
+		&sl->collectible.img.bpx, &sl->collectible.img.line_l, \
+		&sl->collectible.img.endian);
 	sl->door2.img.img = mlx_xpm_file_to_image(sl->mlx_ptr, "./img/door2.xpm", \
 		&sl->door2.width, &sl->door2.height);
 	sl->door2.img.address = mlx_get_data_addr(sl->door2.img.img, \

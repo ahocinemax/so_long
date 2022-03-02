@@ -19,6 +19,7 @@
 # include <math.h>
 # include <mlx.h>
 # include "../libft/libft.h"
+# include "../get_next_line/get_next_line.h"
 
 # define KEY_ESC		65307
 # define KEY_W			119
@@ -99,6 +100,7 @@ typedef struct s_color
 
 typedef struct s_sl
 {
+	t_texture			collectible;
 	t_texture			game;
 	t_texture			wall;
 	t_texture			door1;
@@ -113,7 +115,7 @@ typedef struct s_sl
 	t_draw				d;
 	t_map				map;
 	double				speed_move;
-	int					sprite_nb;
+	int					nb_sprite;
 	void				*mlx_ptr;
 	void				*win_ptr;
 	int					nb_move;
@@ -157,7 +159,7 @@ void	ft_left_right(t_sl *solong);
 void	ft_init_draw(t_sl *solong);
 void	ft_init_img(t_sl *solong);
 void	ft_up_down(t_sl *solong);
-int		ft_char_valid(char c);
 int		ft_play(t_sl *solong);
+int		ft_char_valid(char c);
 
 #endif

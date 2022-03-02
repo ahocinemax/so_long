@@ -19,7 +19,7 @@ void	ft_fill_background(t_sl *sl, int i, int j, t_texture *txture)
 	sl->d.top_pxl = i * sl->el.case_h;
 	sl->d.down_pxl = (i + 1) * sl->el.case_h;
 	sl->d.pos_x = j * sl->el.case_w;
-	background = ft_get_pixel_color(txture, 0, 0);
+	background = ft_get_pxl_color(txture, 0, 0);
 	ft_draw_bg(sl, txture, background);
 }
 
@@ -73,9 +73,9 @@ void	ft_put_elements(t_sl *sl)
 			if (sl->map.map[i][j] == 'E')
 				ft_fill_element(sl, i, j, &sl->bg);
 			if (sl->map.map[i][j] != 'P')
-				ft_fill_element(sl, i, j, &sl->player);
+				ft_fill_element(sl, i, j, &sl->game);
 			if (sl->map.map[i][j] != 'C')
-				ft_fill_element(sl, i, j, &sl->bg);
+				ft_fill_element(sl, i, j, &sl->collectible);
 			if (sl->map.map[i][j] == '1')
 				ft_fill_element(sl, i, j, &sl->wall);
 			j++;

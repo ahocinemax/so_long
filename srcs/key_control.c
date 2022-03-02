@@ -15,15 +15,15 @@
 int	ft_check_nb_elements(int p, int c, int e)
 {
 	if (!p)
-		;
+		ft_putstr_fd("IL MANQUE LE JOUEUR !\n", _STD_OUT);
 	if (p > 1)
-		;
+		ft_putstr_fd("TROP DE JOUEURS !\n", _STD_OUT);
 	if (c < 1)
-		;
+		ft_putstr_fd("IL MANQUE LE SPRITE !\n", _STD_OUT);
 	if (!e)
-		;
+		ft_putstr_fd("IL MANQUE LA SORTIE...\n", _STD_OUT);
 	if (e > 1)
-		;
+		ft_putstr_fd("TROP DE SORTIES !\n", _STD_OUT);
 }
 
 int	ft_key_control(int key, t_sl *sl)

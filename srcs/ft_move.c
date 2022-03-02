@@ -26,7 +26,7 @@ void	ft_play_rules(t_sl *sl, int	x, int y)
 		ft_check_end_game(sl);
 	}
 	else if (sl->map.map[sl->player.i][sl->player.j] == 'C')
-		sl->sprite_nb--;
+		sl->nb_sprite--;
 }
 
 void	ft_move(t_sl *sl, int x, int y, char *tmp)
