@@ -14,6 +14,7 @@
 
 void	ft_init_struct(t_sl *sl)
 {
+	sl->mlx_ptr = NULL;
 	sl->speed_move = 0;
 	sl->nb_sprite = 0;
 	sl->nb_move = 0;
@@ -29,7 +30,7 @@ void	ft_init_struct(t_sl *sl)
 	sl->map.y = 0;
 	sl->map.map = NULL;
 	sl->map.large = 0;
-	sl->map.longu = 1;
+	sl->map.longu = 0;
 	sl->player.x = 0;
 	sl->player.y = 0;
 	sl->move.av = 0;
@@ -39,7 +40,7 @@ void	ft_init_struct(t_sl *sl)
 	sl->game.width = 0;
 	sl->game.height = 0;
 	sl->game.img.address = NULL;
-	sl->resol.height = 900;
+	sl->resol.height = 600;
 	sl->resol.width = 900;
 }
 
@@ -49,23 +50,31 @@ void	ft_init_resol(t_sl *sl)
 	int	max_y;
 
 	if (!sl->resol.height || !sl->resol.width)
-		return ;
+	{
+		ft_putstr_fd("Mauvaise resolution.\n", _STD_ERR);
+		exit(EXIT_FAILURE);
+	}
 	sl->mlx_ptr = mlx_init();
+	if (!sl->mlx_ptr)
+	{
+		ft_putstr_fd("Initialisation de la mlx echoué.\n", _STD_ERR);
+		exit(EXIT_FAILURE);
+	}
 	if (sl->resol.height < 100 || sl->resol.width < 100)
 	{
 		ft_putstr_fd("Resolution trop faible.\n", _STD_OUT);
-		sl->resol.height = 100;
-		sl->resol.width = 100;
+		sl->resol.height = 400;
+		sl->resol.width = 400;
 	}
 	mlx_get_screen_size(sl->mlx_ptr, &max_x, &max_y);
 	if (sl->resol.height > max_y)
 	{
-		ft_putstr_fd("Resolution trop grande.\n", _STD_OUT);
+		ft_putstr_fd("Resolution trop grande. Redimentionnement.\n", _STD_OUT);
 		sl->resol.height = max_y;
 	}
 	if (sl->resol.width > max_x)
 	{
-		ft_putstr_fd("Resolution trop grande.\n", _STD_OUT);
+		ft_putstr_fd("Resolution trop grande. Redimentionnement.\n", _STD_OUT);
 		sl->resol.width = max_x;
 	}
 }
@@ -75,12 +84,11 @@ void	ft_size_map(int fd, t_sl *sl)
 	char	*line;
 
 	line = get_next_line(fd);
-	sl->map.large = ft_strlen(line);
+	sl->map.large = ft_strlen(line) - 1;
 	while (line && *line)
 	{
-		free(line);
-		line = NULL;
 		sl->map.longu++;
+		free(line);
 		line = get_next_line(fd);
 	}
 	if (line && *line)
@@ -102,17 +110,19 @@ void	ft_fill_map(int fd, t_sl *sl)
 	line = get_next_line(fd);
 	while (line && *line)
 	{
-		if (ft_strlen(line) != sl->map.large)
-			return ;
+		if (ft_strlen(line) - 1 != sl->map.large)
+		{
+			ft_putstr_fd("Map incomplete.\n", _STD_ERR);
+			exit(EXIT_FAILURE);
+		}
 		y = -1;
 		while (++y < sl->map.large)
-			sl->map.map[sl->map.x][sl->map.y] = line[y];
+			sl->map.map[sl->map.x][y] = line[y];
+		sl->map.map[sl->map.x][y] = 0;
 		free(line);
 		line = get_next_line(fd);
 		sl->map.x++;
 	}
-	if (line && !*line)
-		free(line);
 	sl->map.map[sl->map.longu] = NULL;
 	ft_check_border_map(sl->map.map, sl->map);
 	ft_check_inside_map(sl->map.map, sl->map, sl);
@@ -131,7 +141,10 @@ int	main(int argc, char **argv)
 	ft_check_args(&sl, argv);
 	fd = open(*argv, O_RDONLY);
 	if (fd == -1)
-		return (-1);
+	{
+		ft_putstr_fd("Le fichier n'a pas pu etre ouvert\n", _STD_ERR);
+		exit(EXIT_FAILURE);
+	}
 	ft_size_map(fd, &sl);
 	close(fd);
 	fd = open(*argv, O_RDONLY);

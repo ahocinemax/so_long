@@ -28,71 +28,73 @@ void	ft_check_end_game(t_sl *sl)
 
 void	ft_check_args(t_sl *sl, char **argv)
 {
-	int	i;
-
-	i = 0;
 	if (ft_strlen(*argv) < 4)
-		return ;
-	while (*argv[i])
-		i++;
+	{
+		ft_putstr_fd("Mauvais nom.\n", _STD_ERR);
+		exit(EXIT_FAILURE);
+	}
 	sl->ext = ft_substr(*argv, ft_strlen(*argv) - 4, ft_strlen(*argv));
+	//ft_putstr_fd("OK!!\n", _STD_OUT);
 	if (ft_strncmp(".ber", sl->ext, 4))
-		return ;
+	{
+		ft_putstr_fd("Mauvaise extention.\n", _STD_ERR);
+		exit(EXIT_FAILURE);
+	}
 	free(sl->ext);
 }
 
 int	ft_char_valid(char c)
 {
+	//printf("c = %c\n", c);
 	return (c == '1' || c == '0' || c == 'C' || c == 'E' || c == 'P');
 }
 
-int	ft_check_border_map(char **map, t_map m)
+void	ft_check_border_map(char **map, t_map m)
 {
-	int	x_max;
-	int	y_max;
 	int	i;
 
-	i = 0;
-	x_max = m.large;
-	y_max = m.longu;
-	while (i < x_max)
+	i = -1;
+	while (++i < m.longu)
 	{
-		if (map[0][i] != '1' || map[x_max - 1][i] != '1')
-			return (-1);
-		i++;
-	}
-	i = 0;
-	while (i < y_max)
+		if (map[i][0] != '1' || map[i][m.large - 1] != '1')
+		{
+			ft_putstr_fd("Bords lateraux non geres.\n", _STD_ERR);
+			exit(EXIT_FAILURE);
+		}
+	}	i = -1;
+	while (++i < m.large)
 	{
-		if (map[i][0] != '1' || map[i][y_max - 1] != '1')
-			return (-1);
-		i++;
+		if ((map[0][i] != '1' || map[m.longu - 1][i] != '1'))
+		{
+			ft_putstr_fd("Bords non geres.\n", _STD_ERR);
+			exit(EXIT_FAILURE);
+		}
 	}
-	return (0);
 }
 
-int	ft_check_inside_map(char **map, t_map m, t_sl *sl)
+void	ft_check_inside_map(char **map, t_map m, t_sl *sl)
 {
 	int	x;
 	int	y;
 
-	x = 0;
-	while (x < m.large)
+	x = -1;
+	while (++x < m.longu)
 	{
-		y = 0;
-		while (y < m.longu)
+		y = -1;
+		while (++y < m.large)
 		{
 			if (!ft_char_valid(map[x][y]))
-				return (-1);
+			{
+				ft_putstr_fd("Caractere invalide trouve.\n", _STD_ERR);
+				exit(EXIT_FAILURE);
+			}
 			if (map[x][y] == 'P')
 				sl->nb_p++;
 			else if (map[x][y] == 'C')
 				sl->nb_c++;
 			else if (map[x][y] == 'E')
 				sl->nb_e++;
-			y++;
 		}
-		x++;
 	}
 	ft_check_nb_elements(sl->nb_p, sl->nb_c, sl->nb_e);
 }

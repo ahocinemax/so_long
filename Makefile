@@ -6,12 +6,12 @@ GNL_DIR = get_next_line/
 
 SRCS = $(MAIN_SRC) $(GNL_SRC)
 
+MAIN_SRC = $(addprefix $(SRC_DIR), $(MAIN))
 MAIN = check.c display.c ft_draw.c ft_move.c \
 		key_control.c so_long.c start_game.c
-MAIN_SRC = $(addprefix $(SRC_DIR), $(MAIN))
 
-GNL = get_next_line.c get_next_line_utils.c
 GNL_SRC = $(addprefix $(GNL_DIR), $(GNL))
+GNL = get_next_line.c get_next_line_utils.c
 
 LIBFT_A = libft.a
 
@@ -19,8 +19,8 @@ LIBFT  = $(addprefix $(LIBF_DIR), $(LIBFT_A))
 
 OBJ = *.o
 
-FLAGS = -Wall -Wextra -Werror
-INCLUDE = -lmlx -framework OpenGL -framework AppKit
+FLAGS = -Wall -Wextra -Werror 
+INCLUDE = -lmlx -lXext -lX11 -lm
 
 NONE='\033[0m'
 GREEN='\033[32m'
@@ -39,7 +39,7 @@ $(NAME): $(OBJ)
 
 $(OBJ): $(SRC)
 	@echo $(CURSIVE)$(GRAY) "     - Making object files..." $(NONE)
-	@gcc $(FALGS) -c $(SRCS)
+	@gcc $(FLAGS) -c $(SRCS)
 
 clean:
 	@echo $(CURSIVE)$(GRAY) "     - Removing object files..." $(NONE)

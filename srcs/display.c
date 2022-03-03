@@ -12,7 +12,7 @@
 
 #include "../includes/so_long.h"
 
-void	ft_fill_background(t_sl *sl, int i, int j, t_texture *txture)
+void	ft_fill_element(t_sl *sl, int i, int j, t_texture *txture)
 {
 	int	background;
 
@@ -40,7 +40,7 @@ int	ft_get_pxl_color(t_texture *txture, int x, int y)
 	return (*(unsigned int *)dst);
 }
 
-void	ft_fill_element(t_sl *sl, int i, int j, t_texture *txture)
+void	ft_fill_background(t_sl *sl, int i, int j, t_texture *txture)
 {
 	sl->d.top_pxl = i * sl->el.case_h;
 	sl->d.down_pxl = (i + 1) * sl->el.case_h;
@@ -61,9 +61,9 @@ void	ft_put_elements(t_sl *sl)
 	int	i;
 	int	j;
 
-	i = -1;
+	i = 0;
 	ft_init_img(sl);
-	while (++i < sl->map.longu)
+	while (i < sl->map.longu)
 	{
 		j = 0;
 		while (j < sl->map.large)
@@ -71,15 +71,15 @@ void	ft_put_elements(t_sl *sl)
 			if (sl->map.map[i][j] != '1')
 				ft_fill_background(sl, i, j, &sl->bg);
 			if (sl->map.map[i][j] == 'E')
-				ft_fill_element(sl, i, j, &sl->bg);
-			if (sl->map.map[i][j] != 'P')
+				ft_fill_element(sl, i, j, &sl->door1);
+			if (sl->map.map[i][j] == 'P')
 				ft_fill_element(sl, i, j, &sl->game);
-			if (sl->map.map[i][j] != 'C')
+			if (sl->map.map[i][j] == 'C')
 				ft_fill_element(sl, i, j, &sl->collectible);
 			if (sl->map.map[i][j] == '1')
 				ft_fill_element(sl, i, j, &sl->wall);
 			j++;
 		}
+		i++;
 	}
-	return ;
 }

@@ -38,7 +38,7 @@ void	ft_draw_bg(t_sl *sl, t_texture *txture, int bg)
 		while (++y < sl->d.down_pxl)
 		{
 			++k;
-			sl->d.top_pxl - 1;
+			sl->d.txture_y = (k * (txture->height / sl->el.case_h));
 			if (sl->d.txture_y < 0)
 				sl->d.txture_y = 0;
 			color = ft_get_pxl_color(txture, sl->d.txture_x, sl->d.txture_y);
