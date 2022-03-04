@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   ft_check.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahocine <ahocine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/14 15:39:10 by ahocine           #+#    #+#             */
-/*   Updated: 2022/02/14 15:39:12 by ahocine          ###   ########.fr       */
+/*   Created: 2022/03/04 19:37:11 by ahocine           #+#    #+#             */
+/*   Updated: 2022/03/04 19:37:13 by ahocine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	ft_check_args(t_sl *sl, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	sl->ext = ft_substr(*argv, ft_strlen(*argv) - 4, ft_strlen(*argv));
-	//ft_putstr_fd("OK!!\n", _STD_OUT);
 	if (ft_strncmp(".ber", sl->ext, 4))
 	{
 		ft_putstr_fd("Mauvaise extention.\n", _STD_ERR);
@@ -45,7 +44,6 @@ void	ft_check_args(t_sl *sl, char **argv)
 
 int	ft_char_valid(char c)
 {
-	//printf("c = %c\n", c);
 	return (c == '1' || c == '0' || c == 'C' || c == 'E' || c == 'P');
 }
 

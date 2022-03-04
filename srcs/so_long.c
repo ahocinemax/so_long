@@ -12,9 +12,18 @@
 
 #include "../includes/so_long.h"
 
+void	ft_texture(t_texture *texture)
+{
+	texture->img.address = NULL;
+	texture->img.img = NULL;
+	texture->height = 0;
+	texture->width = 0;
+}
+
 void	ft_init_struct(t_sl *sl)
 {
 	sl->mlx_ptr = NULL;
+	sl->win_ptr = NULL;
 	sl->speed_move = 0;
 	sl->nb_sprite = 0;
 	sl->nb_move = 0;
@@ -37,9 +46,12 @@ void	ft_init_struct(t_sl *sl)
 	sl->move.arr = 0;
 	sl->move.left = 0;
 	sl->move.right = 0;
-	sl->game.width = 0;
-	sl->game.height = 0;
-	sl->game.img.address = NULL;
+	ft_texture(&sl->game);
+	ft_texture(&sl->wall);
+	ft_texture(&sl->collectible);
+	ft_texture(&sl->bg);
+	ft_texture(&sl->door1);
+	ft_texture(&sl->door2);
 	sl->resol.height = 600;
 	sl->resol.width = 900;
 }
@@ -123,6 +135,7 @@ void	ft_fill_map(int fd, t_sl *sl)
 		line = get_next_line(fd);
 		sl->map.x++;
 	}
+	free(line);
 	sl->map.map[sl->map.longu] = NULL;
 	ft_check_border_map(sl->map.map, sl->map);
 	ft_check_inside_map(sl->map.map, sl->map, sl);

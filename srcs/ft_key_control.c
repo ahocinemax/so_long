@@ -60,7 +60,14 @@ int	ft_key_control2(int key, t_sl *sl)
 
 int	ft_close_cross(t_sl *sl)
 {
-	if (sl)
-		free(sl);
+	int	i;
+
+	i = 0;
+	if (sl && sl->map.map)
+	{
+		while (sl->map.longu--)
+			free(sl->map.map[i++]);
+		free(sl->map.map);
+	}
 	exit(EXIT_SUCCESS);
 }

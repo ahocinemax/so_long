@@ -22,7 +22,7 @@ void	ft_play_rules(t_sl *sl, int	x, int y)
 	if (sl->map.map[sl->player.i][sl->player.j] == 'E')
 	{
 		ft_fill_background(sl, x, y, &sl->bg);
-		ft_fill_element(sl, sl->player.i, sl->player.j, &sl->door1);
+		ft_fill_element(sl, sl->player.i, sl->player.j, &sl->door2);
 		ft_check_end_game(sl);
 	}
 	else if (sl->map.map[sl->player.i][sl->player.j] == 'C')
@@ -68,7 +68,7 @@ void	ft_up_down(t_sl *sl)
 		else
 			ft_move(sl, tmp_x + 1, tmp_y);
 	}
-	if (sl->nb_move > 56 && (sl->move.arr || sl->move.av))
+	if (sl->nb_move >= 56 && (sl->move.arr || sl->move.av))
 	{
 		free(sl);
 		ft_putstr_fd("GAME OVER - NOMBRE DE MVMT MAX DEPASSE\n", _STD_OUT);
@@ -99,7 +99,7 @@ void	ft_left_right(t_sl *sl)
 		else
 			ft_move(sl, tmp_x, tmp_y + 1);
 	}
-	if (sl->nb_move > 56 && (sl->move.left || sl->move.right))
+	if (sl->nb_move >= 56 && (sl->move.left || sl->move.right))
 	{
 		free(sl);
 		ft_putstr_fd("GAME OVER - NOMBRE DE MVMT MAX DEPASSE\n", _STD_OUT);
