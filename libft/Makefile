@@ -21,7 +21,7 @@ OBJS        =    $(SRCS:.c=.o)
 all        :    $(NAME)
 
 $(NAME)    : $(OBJS)
-	@ar crs $@ $(OBJS)
+	@ar rcs $@ $(OBJS)
 
 %.o : %.c
 	@$(CC) $(CFLAGS) $< -o $@
