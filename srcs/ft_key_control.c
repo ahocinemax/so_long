@@ -22,7 +22,7 @@ void	ft_check_nb_elements(int p, int c, int e)
 			ft_putstr_fd("IL MANQUE LE SPRITE !\n", _STD_ERR);
 		if (!e || e > 1)
 			ft_putstr_fd("IL FAUT EXACTEMENT 1 SORTIE.\n", _STD_ERR);
-		exit(EXIT_FAILURE);
+		ft_error(NULL, -1);
 	}
 }
 

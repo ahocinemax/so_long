@@ -52,7 +52,7 @@ void	ft_init_struct(t_sl *sl)
 	ft_texture(&sl->bg);
 	ft_texture(&sl->door1);
 	ft_texture(&sl->door2);
-	sl->resol.height = 600;
+	sl->resol.height = 650;
 	sl->resol.width = 900;
 }
 
@@ -62,16 +62,10 @@ void	ft_init_resol(t_sl *sl)
 	int	max_y;
 
 	if (!sl->resol.height || !sl->resol.width)
-	{
-		ft_putstr_fd("Mauvaise resolution.\n", _STD_ERR);
-		exit(EXIT_FAILURE);
-	}
+		ft_error(sl, 1);
 	sl->mlx_ptr = mlx_init();
 	if (!sl->mlx_ptr)
-	{
-		ft_putstr_fd("Initialisation de la mlx echoué.\n", _STD_ERR);
-		exit(EXIT_FAILURE);
-	}
+		ft_error(sl, 0);
 	if (sl->resol.height < 100 || sl->resol.width < 100)
 	{
 		ft_putstr_fd("Resolution trop faible.\n", _STD_OUT);
@@ -123,10 +117,7 @@ void	ft_fill_map(int fd, t_sl *sl)
 	while (line && *line)
 	{
 		if (ft_strlen(line) - 1 != sl->map.large)
-		{
-			ft_putstr_fd("Map incomplete.\n", _STD_ERR);
-			exit(EXIT_FAILURE);
-		}
+			ft_error(sl, 2);
 		y = -1;
 		while (++y < sl->map.large)
 			sl->map.map[sl->map.x][y] = line[y];
@@ -137,7 +128,7 @@ void	ft_fill_map(int fd, t_sl *sl)
 	}
 	free(line);
 	sl->map.map[sl->map.longu] = NULL;
-	ft_check_border_map(sl->map.map, sl->map);
+	ft_check_border_map(sl, sl->map.map, sl->map);
 	ft_check_inside_map(sl->map.map, sl->map, sl);
 }
 
@@ -147,17 +138,14 @@ int	main(int argc, char **argv)
 	int		fd;
 
 	if (argc != 2)
-		return (EXIT_FAILURE);
+		ft_error(NULL, 3);
 	argv++;
 	ft_init_struct(&sl);
 	ft_init_resol(&sl);
 	ft_check_args(&sl, argv);
 	fd = open(*argv, O_RDONLY);
 	if (fd == -1)
-	{
-		ft_putstr_fd("Le fichier n'a pas pu etre ouvert\n", _STD_ERR);
-		exit(EXIT_FAILURE);
-	}
+		ft_error(&sl, 9);
 	ft_size_map(fd, &sl);
 	close(fd);
 	fd = open(*argv, O_RDONLY);

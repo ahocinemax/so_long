@@ -12,6 +12,47 @@
 
 #include "../includes/so_long.h"
 
+void	ft_error(t_sl *sl, int code)
+{
+	int	i;
+
+	i = 0;
+	if (sl && sl->map.map)
+	{
+		while (sl->map.longu--)
+			free(sl->map.map[i++]);
+		free(sl->map.map);
+	}
+	free(sl->mlx_ptr);
+	free(sl->win_ptr);
+	if (code == 0)
+		ft_putstr_fd("Initialisation de la mlx echoué.\n", _STD_ERR);
+	else if (code == 1)
+		ft_putstr_fd("Mauvaise resolution.\n", _STD_ERR);
+	else if (code == 2)
+		ft_putstr_fd("Map incomplete.\n", _STD_ERR);
+	else if (code == 3)
+		ft_putstr_fd("Usage : ./so_long [PATH_TO_VALID_MAP].\n", _STD_ERR);
+	else if (code == 4)
+		ft_putstr_fd("Nom de carte non valide.\n", _STD_ERR);
+	else if (code == 5)
+		ft_putstr_fd("Mauvaise extention.\n", _STD_ERR);
+	else if (code == 6)
+		ft_putstr_fd("Bords non geres.\n", _STD_ERR);
+	else if (code == 7)
+		ft_putstr_fd("Bords lateraux non geres.\n", _STD_ERR);
+	else if (code == 8)
+		ft_putstr_fd("Caractere invalide trouve.\n", _STD_ERR);
+	else if (code == 9)
+		ft_putstr_fd("Le fichier n'a pas pu etre ouvert\n", _STD_ERR);
+	else if (code == 10)
+		ft_putstr_fd("GAME OVER - NOMBRE DE MVMT MAX DEPASSE\n", _STD_OUT);
+	if (code == -1)
+		ft_close_cross(sl);
+	else
+		exit(EXIT_FAILURE);
+}
+
 void	ft_check_end_game(t_sl *sl)
 {
 	if (sl->nb_sprite)
@@ -29,16 +70,10 @@ void	ft_check_end_game(t_sl *sl)
 void	ft_check_args(t_sl *sl, char **argv)
 {
 	if (ft_strlen(*argv) < 4)
-	{
-		ft_putstr_fd("Mauvais nom.\n", _STD_ERR);
-		exit(EXIT_FAILURE);
-	}
+		ft_error(sl, 4);
 	sl->ext = ft_substr(*argv, ft_strlen(*argv) - 4, ft_strlen(*argv));
 	if (ft_strncmp(".ber", sl->ext, 4))
-	{
-		ft_putstr_fd("Mauvaise extention.\n", _STD_ERR);
-		exit(EXIT_FAILURE);
-	}
+		ft_error(sl, 5);
 	free(sl->ext);
 }
 
@@ -47,7 +82,7 @@ int	ft_char_valid(char c)
 	return (c == '1' || c == '0' || c == 'C' || c == 'E' || c == 'P');
 }
 
-void	ft_check_border_map(char **map, t_map m)
+void	ft_check_border_map(t_sl *sl, char **map, t_map m)
 {
 	int	i;
 
@@ -55,18 +90,13 @@ void	ft_check_border_map(char **map, t_map m)
 	while (++i < m.longu)
 	{
 		if (map[i][0] != '1' || map[i][m.large - 1] != '1')
-		{
-			ft_putstr_fd("Bords lateraux non geres.\n", _STD_ERR);
-			exit(EXIT_FAILURE);
-		}
-	}	i = -1;
+			ft_error(sl, 7);
+	}
+	i = -1;
 	while (++i < m.large)
 	{
 		if ((map[0][i] != '1' || map[m.longu - 1][i] != '1'))
-		{
-			ft_putstr_fd("Bords non geres.\n", _STD_ERR);
-			exit(EXIT_FAILURE);
-		}
+			ft_error(sl, 6);
 	}
 }
 
@@ -82,10 +112,7 @@ void	ft_check_inside_map(char **map, t_map m, t_sl *sl)
 		while (++y < m.large)
 		{
 			if (!ft_char_valid(map[x][y]))
-			{
-				ft_putstr_fd("Caractere invalide trouve.\n", _STD_ERR);
-				exit(EXIT_FAILURE);
-			}
+				ft_error(sl, 8);
 			if (map[x][y] == 'P')
 				sl->nb_p++;
 			else if (map[x][y] == 'C')

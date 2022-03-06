@@ -100,11 +100,7 @@ void	ft_left_right(t_sl *sl)
 			ft_move(sl, tmp_x, tmp_y + 1);
 	}
 	if (sl->nb_move >= 56 && (sl->move.left || sl->move.right))
-	{
-		free(sl);
-		ft_putstr_fd("GAME OVER - NOMBRE DE MVMT MAX DEPASSE\n", _STD_OUT);
-		exit(EXIT_SUCCESS);
-	}
+		ft_error(sl, 10);
 	sl->move.left = 0;
 	sl->move.right = 0;
 }
