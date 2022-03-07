@@ -12,47 +12,6 @@
 
 #include "../includes/so_long.h"
 
-void	ft_error(t_sl *sl, int code)
-{
-	int	i;
-
-	i = 0;
-	if (sl && sl->map.map)
-	{
-		while (sl->map.longu--)
-			free(sl->map.map[i++]);
-		free(sl->map.map);
-	}
-	free(sl->mlx_ptr);
-	free(sl->win_ptr);
-	if (code == 0)
-		ft_putstr_fd("Initialisation de la mlx echoué.\n", _STD_ERR);
-	else if (code == 1)
-		ft_putstr_fd("Mauvaise resolution.\n", _STD_ERR);
-	else if (code == 2)
-		ft_putstr_fd("Map incomplete.\n", _STD_ERR);
-	else if (code == 3)
-		ft_putstr_fd("Usage : ./so_long [PATH_TO_VALID_MAP].\n", _STD_ERR);
-	else if (code == 4)
-		ft_putstr_fd("Nom de carte non valide.\n", _STD_ERR);
-	else if (code == 5)
-		ft_putstr_fd("Mauvaise extention.\n", _STD_ERR);
-	else if (code == 6)
-		ft_putstr_fd("Bords non geres.\n", _STD_ERR);
-	else if (code == 7)
-		ft_putstr_fd("Bords lateraux non geres.\n", _STD_ERR);
-	else if (code == 8)
-		ft_putstr_fd("Caractere invalide trouve.\n", _STD_ERR);
-	else if (code == 9)
-		ft_putstr_fd("Le fichier n'a pas pu etre ouvert\n", _STD_ERR);
-	else if (code == 10)
-		ft_putstr_fd("GAME OVER - NOMBRE DE MVMT MAX DEPASSE\n", _STD_OUT);
-	if (code == -1)
-		ft_close_cross(sl);
-	else
-		exit(EXIT_FAILURE);
-}
-
 void	ft_check_end_game(t_sl *sl)
 {
 	if (sl->nb_sprite)
@@ -65,6 +24,7 @@ void	ft_check_end_game(t_sl *sl)
 		ft_putstr_fd("C'EST GAGNE !\n", _STD_OUT);
 		sl->win = 1;
 	}
+	ft_close_cross(sl);
 }
 
 void	ft_check_args(t_sl *sl, char **argv)
@@ -98,6 +58,7 @@ void	ft_check_border_map(t_sl *sl, char **map, t_map m)
 		if ((map[0][i] != '1' || map[m.longu - 1][i] != '1'))
 			ft_error(sl, 6);
 	}
+	ft_check_inside_map(map, m, sl);
 }
 
 void	ft_check_inside_map(char **map, t_map m, t_sl *sl)

@@ -75,7 +75,7 @@ void	ft_put_elements(t_sl *sl)
 			if (sl->map.map[i][j] == 'P')
 				ft_fill_element(sl, i, j, &sl->game);
 			if (sl->map.map[i][j] == 'C')
-				ft_fill_element(sl, i, j, &sl->collectible);
+				ft_fill_element(sl, i, j, &sl->col);
 			if (sl->map.map[i][j] == '1')
 				ft_fill_element(sl, i, j, &sl->wall);
 			j++;

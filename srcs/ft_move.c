@@ -54,25 +54,14 @@ void	ft_up_down(t_sl *sl)
 
 	tmp_x = sl->player.i;
 	tmp_y = sl->player.j;
-	if (sl->move.av)
+	if (sl->move.av && !ft_freeze_player(sl, sl->player.i - 1, sl->player.j))
+		ft_move(sl, tmp_x - 1, tmp_y);
+	if (sl->move.arr && !ft_freeze_player(sl, sl->player.i + 1, sl->player.j))
+		ft_move(sl, tmp_x + 1, tmp_y);
+	if (sl->nb_move >= 70 && (sl->move.arr || sl->move.av))
 	{
-		if (ft_freeze_player(sl, sl->player.i - 1, sl->player.j))
-			sl->player.i = tmp_x;
-		else
-			ft_move(sl, tmp_x - 1, tmp_y);
-	}
-	if (sl->move.arr)
-	{
-		if (ft_freeze_player(sl, sl->player.i + 1, sl->player.j))
-			sl->player.i = tmp_x;
-		else
-			ft_move(sl, tmp_x + 1, tmp_y);
-	}
-	if (sl->nb_move >= 56 && (sl->move.arr || sl->move.av))
-	{
-		free(sl);
 		ft_putstr_fd("GAME OVER - NOMBRE DE MVMT MAX DEPASSE\n", _STD_OUT);
-		exit(EXIT_SUCCESS);
+		ft_close_cross(sl);
 	}
 	sl->move.arr = 0;
 	sl->move.av = 0;
@@ -85,22 +74,15 @@ void	ft_left_right(t_sl *sl)
 
 	tmp_x = sl->player.i;
 	tmp_y = sl->player.j;
-	if (sl->move.left)
+	if (sl->move.left && !ft_freeze_player(sl, sl->player.i, sl->player.j - 1))
+		ft_move(sl, tmp_x, tmp_y - 1);
+	if (sl->move.right && !ft_freeze_player(sl, sl->player.i, sl->player.j + 1))
+		ft_move(sl, tmp_x, tmp_y + 1);
+	if (sl->nb_move >= 70 && (sl->move.left || sl->move.right))
 	{
-		if (ft_freeze_player(sl, sl->player.i, sl->player.j - 1))
-			sl->player.i = tmp_x;
-		else
-			ft_move(sl, tmp_x, tmp_y - 1);
+		ft_putstr_fd("GAME OVER - NOMBRE DE MVMT MAX DEPASSE\n", _STD_OUT);
+		ft_close_cross(sl);
 	}
-	if (sl->move.right)
-	{
-		if (ft_freeze_player(sl, sl->player.i, sl->player.j + 1))
-			sl->player.i = tmp_x;
-		else
-			ft_move(sl, tmp_x, tmp_y + 1);
-	}
-	if (sl->nb_move >= 56 && (sl->move.left || sl->move.right))
-		ft_error(sl, 10);
 	sl->move.left = 0;
 	sl->move.right = 0;
 }

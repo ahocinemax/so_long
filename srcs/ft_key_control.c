@@ -12,18 +12,48 @@
 
 #include "../includes/so_long.h"
 
-void	ft_check_nb_elements(int p, int c, int e)
+static void	ft_error2(t_sl *sl, int code)
 {
-	if (!p || p > 1 || c < 1 || !e || e > 1)
+	if (code == 5)
+		ft_putstr_fd("Mauvaise extention.\n", _STD_ERR);
+	else if (code == 6)
+		ft_putstr_fd("Bords non geres.\n", _STD_ERR);
+	else if (code == 7)
+		ft_putstr_fd("Bords lateraux non geres.\n", _STD_ERR);
+	else if (code == 8)
+		ft_putstr_fd("Caractere invalide trouve.\n", _STD_ERR);
+	else if (code == 9)
+		ft_putstr_fd("Le fichier n'a pas pu etre ouvert\n", _STD_ERR);
+	else if (code == -1)
+		ft_close_cross(sl);
+}
+
+void	ft_error(t_sl *sl, int code)
+{
+	int	i;
+
+	i = 0;
+	if (sl && sl->map.map)
 	{
-		if (!p || p > 1)
-			ft_putstr_fd("IL FAUT EXACTEMENT 1 JOUEUR.\n", _STD_ERR);
-		if (c < 1)
-			ft_putstr_fd("IL MANQUE LE SPRITE !\n", _STD_ERR);
-		if (!e || e > 1)
-			ft_putstr_fd("IL FAUT EXACTEMENT 1 SORTIE.\n", _STD_ERR);
-		ft_error(NULL, -1);
+		while (sl->map.longu--)
+			free(sl->map.map[i++]);
+		free(sl->map.map);
 	}
+	free(sl->mlx_ptr);
+	free(sl->win_ptr);
+	if (code == 0)
+		ft_putstr_fd("Initialisation de la mlx echoué.\n", _STD_ERR);
+	else if (code == 1)
+		ft_putstr_fd("Mauvaise resolution.\n", _STD_ERR);
+	else if (code == 2)
+		ft_putstr_fd("Map incomplete.\n", _STD_ERR);
+	else if (code == 3)
+		ft_putstr_fd("Usage : ./so_long [PATH_TO_VALID_MAP].\n", _STD_ERR);
+	else if (code == 4)
+		ft_putstr_fd("Nom de carte non valide.\n", _STD_ERR);
+	else
+		ft_error2(sl, code);
+	exit(EXIT_FAILURE);
 }
 
 int	ft_key_control(int key, t_sl *sl)

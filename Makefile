@@ -8,8 +8,10 @@ OBJ_DIR = obj/
 SRCS = $(GNL_SRC) $(MAIN_SRC)
 
 MAIN_SRC = $(addprefix $(SRC_DIR), $(MAIN))
-MAIN = ft_check.c ft_display.c ft_draw.c ft_move.c \
-		ft_key_control.c so_long.c ft_start_game.c
+MAIN = ft_utils.c ft_check.c ft_display.c ft_draw.c \
+		ft_move.c ft_key_control.c so_long.c \
+		ft_start_game.c \
+		
 
 GNL_SRC = $(addprefix $(GNL_DIR), $(GNL))
 GNL = get_next_line.c get_next_line_utils.c
@@ -20,7 +22,7 @@ LIBFT  = $(addprefix $(LIB_DIR), $(LIBFT_A))
 
 OBJ = *.o
 
-FLAGS = -Wall -Wextra -Werror 
+FLAGS = -Wall -Wextra -Werror -g3
 INCLUDE = -lmlx -lXext -lX11 -lm
 
 NONE='\033[0m'

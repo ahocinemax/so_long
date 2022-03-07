@@ -14,7 +14,7 @@
 
 int	ft_play(t_sl *sl)
 {
-	if (!sl->win && !sl->loose && sl->pv && sl->nb_move < 56)
+	if (!sl->win && !sl->loose && sl->pv && sl->nb_move <= 70)
 	{
 		ft_put_elements(sl);
 		ft_up_down(sl);
@@ -73,12 +73,10 @@ void	ft_init_texture(t_sl *sl)
 		&sl->door1.width, &sl->door1.height);
 	sl->door1.img.address = mlx_get_data_addr(sl->door1.img.img, \
 		&sl->door1.img.bpx, &sl->door1.img.line_l, &sl->door1.img.endian);
-	sl->collectible.img.img = mlx_xpm_file_to_image(sl->mlx_ptr, \
-		"./img/collectible.xpm", &sl->collectible.width, \
-		&sl->collectible.height);
-	sl->collectible.img.address = mlx_get_data_addr(sl->collectible.img.img, \
-		&sl->collectible.img.bpx, &sl->collectible.img.line_l, \
-		&sl->collectible.img.endian);
+	sl->col.img.img = mlx_xpm_file_to_image(sl->mlx_ptr, "./img/col.xpm", \
+		&sl->col.width, &sl->col.height);
+	sl->col.img.address = mlx_get_data_addr(sl->col.img.img, \
+		&sl->col.img.bpx, &sl->col.img.line_l, &sl->col.img.endian);
 	sl->door2.img.img = mlx_xpm_file_to_image(sl->mlx_ptr, "./img/door2.xpm", \
 		&sl->door2.width, &sl->door2.height);
 	sl->door2.img.address = mlx_get_data_addr(sl->door2.img.img, \

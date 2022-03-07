@@ -11,14 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-void	ft_texture(t_texture *texture)
-{
-	texture->img.address = NULL;
-	texture->img.img = NULL;
-	texture->height = 0;
-	texture->width = 0;
-}
+#include "../get_next_line/get_next_line.h"
 
 void	ft_init_struct(t_sl *sl)
 {
@@ -35,25 +28,8 @@ void	ft_init_struct(t_sl *sl)
 	sl->end = 0;
 	sl->win = 0;
 	sl->pv = 5;
-	sl->map.x = 0;
-	sl->map.y = 0;
-	sl->map.map = NULL;
-	sl->map.large = 0;
-	sl->map.longu = 0;
-	sl->player.x = 0;
-	sl->player.y = 0;
-	sl->move.av = 0;
-	sl->move.arr = 0;
-	sl->move.left = 0;
-	sl->move.right = 0;
-	ft_texture(&sl->game);
-	ft_texture(&sl->wall);
-	ft_texture(&sl->collectible);
-	ft_texture(&sl->bg);
-	ft_texture(&sl->door1);
-	ft_texture(&sl->door2);
-	sl->resol.height = 650;
-	sl->resol.width = 900;
+	sl->img.address = NULL;
+	ft_init_struct2(sl);
 }
 
 void	ft_init_resol(t_sl *sl)
@@ -114,7 +90,7 @@ void	ft_fill_map(int fd, t_sl *sl)
 	while (i < sl->map.longu)
 		sl->map.map[i++] = (char *)malloc(sizeof(char) * (sl->map.large + 1));
 	line = get_next_line(fd);
-	while (line && *line)
+	while (line && *line && *line != '\n')
 	{
 		if (ft_strlen(line) - 1 != sl->map.large)
 			ft_error(sl, 2);
@@ -129,7 +105,6 @@ void	ft_fill_map(int fd, t_sl *sl)
 	free(line);
 	sl->map.map[sl->map.longu] = NULL;
 	ft_check_border_map(sl, sl->map.map, sl->map);
-	ft_check_inside_map(sl->map.map, sl->map, sl);
 }
 
 int	main(int argc, char **argv)

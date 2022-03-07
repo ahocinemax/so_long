@@ -12,6 +12,14 @@
 
 #include "../includes/so_long.h"
 
+void	ft_texture(t_texture *texture)
+{
+	texture->img.address = NULL;
+	texture->img.img = NULL;
+	texture->height = 0;
+	texture->width = 0;
+}
+
 void	ft_image_pixel(t_image *image, int x, int y, int color)
 {
 	char	*res;
@@ -27,6 +35,7 @@ void	ft_draw_bg(t_sl *sl, t_texture *txture, int bg)
 	int	y;
 	int	k;
 
+	color = 0;
 	x = -1;
 	while (sl->d.pos_x + x < 0)
 		x++;
