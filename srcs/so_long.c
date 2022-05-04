@@ -17,7 +17,6 @@ void	ft_init_struct(t_sl *sl)
 {
 	sl->mlx_ptr = NULL;
 	sl->win_ptr = NULL;
-	sl->speed_move = 0;
 	sl->nb_sprite = 0;
 	sl->nb_move = 0;
 	sl->ext = NULL;
@@ -115,12 +114,15 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		ft_error(NULL, 3);
 	argv++;
+	fd = open(*argv, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_putstr_fd("Map introuvable.\n", _STD_ERR);
+		exit(EXIT_FAILURE);
+	}
 	ft_init_struct(&sl);
 	ft_init_resol(&sl);
 	ft_check_args(&sl, argv);
-	fd = open(*argv, O_RDONLY);
-	if (fd == -1)
-		ft_error(&sl, 9);
 	ft_size_map(fd, &sl);
 	close(fd);
 	fd = open(*argv, O_RDONLY);

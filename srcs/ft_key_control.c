@@ -51,14 +51,15 @@ void	ft_error(t_sl *sl, int code)
 		ft_putstr_fd("Nom de carte non valide.\n", _STD_ERR);
 	else
 		ft_error2(sl, code);
-	mlx_destroy_image(sl->mlx_ptr, sl->win_ptr);
-	mlx_destroy_display(sl->mlx_ptr);
+	if (sl->mlx_ptr)
+		mlx_destroy_image(sl->mlx_ptr, sl->win_ptr);
+	if (sl->win_ptr)
+		mlx_destroy_display(sl->mlx_ptr);
 	exit(EXIT_FAILURE);
 }
 
 int	ft_key_control(int key, t_sl *sl)
 {
-	sl->speed_move = 0.2;
 	if (key == KEY_W)
 		sl->move.av = 1;
 	else if (key == KEY_A)
@@ -74,7 +75,6 @@ int	ft_key_control(int key, t_sl *sl)
 
 int	ft_key_control2(int key, t_sl *sl)
 {
-	sl->speed_move = 0.2;
 	if (key == KEY_W)
 		sl->move.av = 0;
 	else if (key == KEY_A)

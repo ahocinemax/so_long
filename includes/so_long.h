@@ -113,7 +113,6 @@ typedef struct s_sl
 	t_move				move;
 	t_draw				d;
 	t_map				map;
-	double				speed_move;
 	int					nb_sprite;
 	void				*mlx_ptr;
 	void				*win_ptr;
