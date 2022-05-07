@@ -17,7 +17,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <math.h>
-# include <mlx.h>
+# include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
 # define KEY_ESC		65307

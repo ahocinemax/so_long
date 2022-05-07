@@ -16,6 +16,7 @@ void	ft_fill_element(t_sl *sl, int i, int j, t_texture *txture)
 {
 	int	background;
 
+	background = 0;
 	sl->d.top_pxl = i * sl->el.case_h;
 	sl->d.down_pxl = (i + 1) * sl->el.case_h;
 	sl->d.pos_x = j * sl->el.case_w;

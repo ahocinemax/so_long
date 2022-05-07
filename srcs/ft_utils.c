@@ -70,17 +70,16 @@ void	ft_init_struct2(t_sl *sl)
 
 void	ft_destroy_texture(t_sl *sl)
 {
-	free(sl->game.img.img);
-	free(sl->game.img.address);
-	free(sl->wall.img.img);
-	free(sl->wall.img.address);
-	free(sl->door1.img.img);
-	free(sl->door1.img.address);
-	free(sl->col.img.img);
-	free(sl->col.img.address);
-	free(sl->door2.img.img);
-	free(sl->door2.img.address);
-	free(sl->bg.img.img);
-	free(sl->bg.img.address);
-	mlx_destroy_image(sl->mlx_ptr, sl->img.img);
+	// free(sl->game.img.address);
+	mlx_destroy_image(sl->mlx_ptr, sl->game.img.img);
+	// free(sl->wall.img.address);
+	mlx_destroy_image(sl->mlx_ptr, sl->wall.img.img);
+	// free(sl->door1.img.address);
+	mlx_destroy_image(sl->mlx_ptr, sl->door1.img.img);
+	// free(sl->col.img.address);
+	mlx_destroy_image(sl->mlx_ptr, sl->col.img.img);
+	// free(sl->door2.img.address);
+	mlx_destroy_image(sl->mlx_ptr, sl->door2.img.img);
+	// free(sl->bg.img.address);
+	mlx_destroy_image(sl->mlx_ptr, sl->bg.img.img);
 }

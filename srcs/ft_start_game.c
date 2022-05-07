@@ -100,5 +100,3 @@ void	ft_start_game(t_sl *sl)
 	mlx_hook(sl->win_ptr, 33, 1L, ft_close_cross, sl);
 	mlx_loop(sl->mlx_ptr);
 }
-
-mlx_init()
