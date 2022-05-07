@@ -39,6 +39,13 @@ void	ft_error(t_sl *sl, int code)
 			free(sl->map.map[i++]);
 		free(sl->map.map);
 	}
+	if (sl->mlx_ptr && sl->win_ptr)
+		mlx_destroy_window(sl->mlx_ptr, sl->win_ptr);
+	if (sl->mlx_ptr)
+	{
+		mlx_destroy_display(sl->mlx_ptr);
+		free(sl->mlx_ptr);
+	}
 	if (code == 0)
 		ft_putstr_fd("Initialisation de la mlx echoué.\n", _STD_ERR);
 	else if (code == 1)
@@ -51,10 +58,6 @@ void	ft_error(t_sl *sl, int code)
 		ft_putstr_fd("Nom de carte non valide.\n", _STD_ERR);
 	else
 		ft_error2(sl, code);
-	if (sl->mlx_ptr && sl->win_ptr)
-		mlx_destroy_window(sl->mlx_ptr, sl->win_ptr);
-	if (sl->win_ptr)
-		mlx_destroy_display(sl->mlx_ptr);
 	exit(EXIT_FAILURE);
 }
 

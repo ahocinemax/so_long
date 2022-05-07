@@ -33,7 +33,10 @@ void	ft_check_args(t_sl *sl, char **argv)
 		ft_error(sl, 4);
 	sl->ext = ft_substr(*argv, ft_strlen(*argv) - 4, ft_strlen(*argv));
 	if (ft_strncmp(".ber", sl->ext, 4))
+	{
+		free(sl->ext);
 		ft_error(sl, 5);
+	}
 	free(sl->ext);
 }
 

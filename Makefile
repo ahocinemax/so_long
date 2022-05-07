@@ -55,13 +55,12 @@ $(OBJ): $(SRC)
 
 clean:
 	@echo $(CURSIVE)$(GRAY) "     - Removing object files..." $(NONE)
-	@rm -f $(OBJ_DIR)$(OBJ)
+	@rm -f $(OBJ_DIR)*.o
 	@make -C $(LIB_DIR) clean
 	@make -C $(MLX_DIR) clean
 
 fclean: clean
 	@echo $(CURSIVE)$(GRAY) "     - Removing $(NAME)..." $(NONE)
-	@rm -f $(OBJ_DIR)$(OBJ)
 	@rm -f $(NAME)
 	@make -C $(LIB_DIR) fclean
 
