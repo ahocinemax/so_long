@@ -152,6 +152,7 @@ void	ft_put_elements(t_sl *solong);
 void	ft_init_texture(t_sl *solong);
 void	ft_init_struct2(t_sl *solong);
 void	ft_init_struct(t_sl *solong);
+void	ft_destroy_texture(t_sl *sl);
 void	ft_nb_elements(t_sl *solong);
 int		ft_close_cross(t_sl *solong);
 void	ft_init_resol(t_sl *solong);

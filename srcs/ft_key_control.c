@@ -51,8 +51,8 @@ void	ft_error(t_sl *sl, int code)
 		ft_putstr_fd("Nom de carte non valide.\n", _STD_ERR);
 	else
 		ft_error2(sl, code);
-	if (sl->mlx_ptr)
-		mlx_destroy_image(sl->mlx_ptr, sl->win_ptr);
+	if (sl->mlx_ptr && sl->win_ptr)
+		mlx_destroy_window(sl->mlx_ptr, sl->win_ptr);
 	if (sl->win_ptr)
 		mlx_destroy_display(sl->mlx_ptr);
 	exit(EXIT_FAILURE);
@@ -101,5 +101,8 @@ int	ft_close_cross(t_sl *sl)
 	}
 	mlx_destroy_window(sl->mlx_ptr, sl->win_ptr);
 	mlx_destroy_display(sl->mlx_ptr);
+	ft_destroy_texture(sl);
+	free(sl->img.address);
+	free(sl->img.img);
 	exit(EXIT_SUCCESS);
 }

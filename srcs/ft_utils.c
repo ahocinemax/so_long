@@ -67,3 +67,20 @@ void	ft_init_struct2(t_sl *sl)
 	sl->resol.height = 650;
 	sl->resol.width = 900;
 }
+
+void	ft_destroy_texture(t_sl *sl)
+{
+	free(sl->game.img.img);
+	free(sl->game.img.address);
+	free(sl->wall.img.img);
+	free(sl->wall.img.address);
+	free(sl->door1.img.img);
+	free(sl->door1.img.address);
+	free(sl->col.img.img);
+	free(sl->col.img.address);
+	free(sl->door2.img.img);
+	free(sl->door2.img.address);
+	free(sl->bg.img.img);
+	free(sl->bg.img.address);
+	mlx_destroy_image(sl->mlx_ptr, sl->img.img);
+}
