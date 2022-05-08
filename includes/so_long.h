@@ -137,7 +137,7 @@ void	ft_check_nb_elements(t_sl *solong, int p, int c, int e);
 int		ft_get_pxl_color(t_texture *txture, int x, int y);
 int		ft_freeze_player(t_sl *solong, int x, int y);
 void	ft_draw_pxl(t_sl *solong, t_texture *txture);
-void	ft_play_rules(t_sl *solong, int	x, int y);
+void	ft_play_rules(t_sl *solong, int x, int y);
 void	ft_check_args(t_sl *solong, char **argv);
 int		ft_key_control2(int key, t_sl *solong);
 void	ft_error(t_sl *solong, int error_code);

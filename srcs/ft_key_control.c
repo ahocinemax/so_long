@@ -75,8 +75,6 @@ void	ft_destroy_texture(t_sl *sl)
 	mlx_destroy_image(sl->mlx_ptr, sl->col.img.img);
 	mlx_destroy_image(sl->mlx_ptr, sl->door2.img.img);
 	mlx_destroy_image(sl->mlx_ptr, sl->bg.img.img);
-	// if (sl->img.img)
-	// 	free(sl->img.img);
 }
 
 int	ft_close_cross(t_sl *sl)

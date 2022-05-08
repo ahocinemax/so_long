@@ -17,7 +17,7 @@ int	ft_freeze_player(t_sl *sl, int x, int y)
 	return ((sl->map.map[x][y] == '1') || (sl->map.map[x][y] == '2'));
 }
 
-void	ft_play_rules(t_sl *sl, int	x, int y)
+void	ft_play_rules(t_sl *sl, int x, int y)
 {
 	if (sl->map.map[sl->player.i][sl->player.j] == 'E')
 	{
