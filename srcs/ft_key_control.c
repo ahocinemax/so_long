@@ -14,6 +14,7 @@
 
 void	ft_error(t_sl *sl, int code)
 {
+	// ft_putstr_fd("OK\n", _STD_OUT);
 	if (code == 0)
 		ft_putstr_fd("Initialisation de la mlx echoué.\n", _STD_ERR);
 	else if (code == 1)
@@ -27,7 +28,7 @@ void	ft_error(t_sl *sl, int code)
 	if (code == 5)
 		ft_putstr_fd("Mauvaise extention.\n", _STD_ERR);
 	else if (code == 6)
-		ft_putstr_fd("Bords non geres.\n", _STD_ERR);
+		ft_putstr_fd("Bords horizontaux non geres.\n", _STD_ERR);
 	else if (code == 7)
 		ft_putstr_fd("Bords lateraux non geres.\n", _STD_ERR);
 	else if (code == 8)
@@ -82,18 +83,22 @@ int	ft_close_cross(t_sl *sl)
 	int	i;
 
 	i = 0;
+	if (!sl)
+		exit(EXIT_SUCCESS);
 	if (sl && sl->map.map)
 	{
 		while (sl->map.longu--)
 			free(sl->map.map[i++]);
 		free(sl->map.map);
 	}
-	if (sl->game.img.img)
+	if (sl->bg.img.img)
 		ft_destroy_texture(sl);
 	if (sl->mlx_ptr && sl->win_ptr)
 		mlx_destroy_window(sl->mlx_ptr, sl->win_ptr);
 	if (sl->mlx_ptr)
+	{
 		mlx_destroy_display(sl->mlx_ptr);
-	free(sl->mlx_ptr);
+		free(sl->mlx_ptr);
+	}
 	exit(EXIT_SUCCESS);
 }
