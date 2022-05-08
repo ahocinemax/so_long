@@ -14,7 +14,6 @@
 
 void	ft_error(t_sl *sl, int code)
 {
-	// ft_putstr_fd("OK\n", _STD_OUT);
 	if (code == 0)
 		ft_putstr_fd("Initialisation de la mlx echoué.\n", _STD_ERR);
 	else if (code == 1)
@@ -91,6 +90,8 @@ int	ft_close_cross(t_sl *sl)
 			free(sl->map.map[i++]);
 		free(sl->map.map);
 	}
+	if (sl->win == 1 || sl->loose == 1)
+		mlx_destroy_image(sl->mlx_ptr, sl->img.img);
 	if (sl->bg.img.img)
 		ft_destroy_texture(sl);
 	if (sl->mlx_ptr && sl->win_ptr)
