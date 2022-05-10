@@ -1,5 +1,4 @@
 NAME = so_long
-
 GNL_DIR = get_next_line/
 LIB_DIR = libft/
 SRC_DIR = srcs/
@@ -44,6 +43,7 @@ $(NAME): $(OBJ)
 	@echo $(CURSIVE)$(GRAY) "     - Compiling $(NAME)..." $(NONE)
 	@gcc $(FLAGS) $(OBJ) $(LIBFT) $(LIBMLX) $(INCLUDE) -o $(NAME)
 	@echo $(CURSIVE)$(GRAY) "     - Moving object files..." $(NONE)
+	@mkdir $(OBJ_DIR)
 	@mv $(OBJ) $(OBJ_DIR)
 	@echo $(YELLOW)"- Game compiled -"$(NONE)
 
@@ -60,7 +60,7 @@ clean:
 
 fclean: clean
 	@echo $(CURSIVE)$(GRAY) "     - Removing $(NAME)..." $(NONE)
-	@rm -f $(NAME)
+	@rm -rf $(NAME) $(OBJ_DIR)
 	@make -C $(LIB_DIR) fclean
 
 re: fclean all

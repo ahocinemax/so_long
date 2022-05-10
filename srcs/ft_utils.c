@@ -64,6 +64,6 @@ void	ft_init_struct2(t_sl *sl)
 	ft_texture(&sl->bg);
 	ft_texture(&sl->door1);
 	ft_texture(&sl->door2);
-	sl->resol.height = 650;
-	sl->resol.width = 900;
+	sl->resol.height = 1080;
+	sl->resol.width = 1920;
 }
