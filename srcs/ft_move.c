@@ -60,7 +60,7 @@ void	ft_up_down(t_sl *sl)
 		ft_move(sl, tmp_x + 1, tmp_y);
 	if (sl->nb_move >= 70 && (sl->move.arr || sl->move.av))
 	{
-		ft_putstr_fd("GAME OVER - NOMBRE DE MVMT MAX DEPASSE\n", _STD_OUT);
+		ft_putstr_fd("GAME OVER - NOMBRE DE MOUVENT MAX DEPASSE\n", _STD_OUT);
 		ft_close_cross(sl);
 	}
 	sl->move.arr = 0;
@@ -80,7 +80,7 @@ void	ft_left_right(t_sl *sl)
 		ft_move(sl, tmp_x, tmp_y + 1);
 	if (sl->nb_move >= 70 && (sl->move.left || sl->move.right))
 	{
-		ft_putstr_fd("GAME OVER - NOMBRE DE MVMT MAX DEPASSE\n", _STD_OUT);
+		ft_putstr_fd("GAME OVER - NOMBRE DE MOUVEMENT MAX DEPASSE\n", _STD_OUT);
 		ft_close_cross(sl);
 	}
 	sl->move.left = 0;
