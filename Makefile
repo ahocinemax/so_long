@@ -44,7 +44,7 @@ $(NAME): $(OBJ)
 	@gcc $(FLAGS) $(OBJ) $(LIBFT) $(LIBMLX) $(INCLUDE) -o $(NAME)
 	@echo $(CURSIVE)$(GRAY) "     - Moving object files..." $(NONE)
 	@mkdir $(OBJ_DIR)
-	@mv $(OBJ) $(OBJ_DIR)
+	@mv -f $(OBJ) $(OBJ_DIR)
 	@echo $(YELLOW)"- Game compiled -"$(NONE)
 
 $(OBJ): $(SRC)
