@@ -14,12 +14,18 @@
 
 void	ft_check_nb_elements(t_sl *sl, int p, int c, int e)
 {
-	if (!p || p > 1 || c < 1 || !e || e > 1)
+	if (p != 1 || c < 1 || e != 1)
 	{
-		if (!p || p > 1)
-			ft_putstr_fd("IL FAUT EXACTEMENT 1 JOUEUR.\n", _STD_ERR);
+		if (p > 1)
+		{
+			ft_putstr_fd("IL FAUT EXACTEMENT 1 JOUEUR. ", _STD_ERR);
+			ft_putnbr_fd(p, _STD_ERR);
+			ft_putstr_fd(" ONT ETE TROUVES.\n", _STD_ERR);
+		}
+		else if (!p)
+			ft_putstr_fd("VOUS AVEZ OUBLIE LE JOUEUR.\n", _STD_ERR);
 		if (c < 1)
-			ft_putstr_fd("IL MANQUE LE SPRITE !\n", _STD_ERR);
+			ft_putstr_fd("IL MANQUE LES COLLECTIBLES !\n", _STD_ERR);
 		if (!e || e > 1)
 			ft_putstr_fd("IL FAUT EXACTEMENT 1 SORTIE.\n", _STD_ERR);
 		ft_error(sl, -1);

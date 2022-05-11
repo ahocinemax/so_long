@@ -24,7 +24,7 @@ void	ft_error(t_sl *sl, int code)
 		ft_putstr_fd("Usage : ./so_long [PATH_TO_VALID_MAP].\n", _STD_ERR);
 	else if (code == 4)
 		ft_putstr_fd("Nom de carte non valide.\n", _STD_ERR);
-	if (code == 5)
+	else if (code == 5)
 		ft_putstr_fd("Mauvaise extention.\n", _STD_ERR);
 	else if (code == 6)
 		ft_putstr_fd("Bords horizontaux non geres.\n", _STD_ERR);

@@ -43,11 +43,12 @@ $(NAME): $(OBJ)
 	@echo $(CURSIVE)$(GRAY) "     - Compiling $(NAME)..." $(NONE)
 	@gcc $(FLAGS) $(OBJ) $(LIBFT) $(LIBMLX) $(INCLUDE) -o $(NAME)
 	@echo $(CURSIVE)$(GRAY) "     - Moving object files..." $(NONE)
-	@mkdir $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 	@mv -f $(OBJ) $(OBJ_DIR)
 	@echo $(YELLOW)"- Game compiled -"$(NONE)
 
 $(OBJ): $(SRC)
+	@rm -f *.o
 	@echo $(CURSIVE)$(GRAY) "     - Making object files..." $(NONE)
 	@gcc $(FLAGS) -c $(SRCS)
 
