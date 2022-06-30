@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahocine <ahocine@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/11 04:53:20 by ahocine           #+#    #+#             */
-/*   Updated: 2021/04/11 05:48:03 by ahocine          ###   ########.fr       */
+/*   Created: 2022/05/15 14:40:59 by ahocine           #+#    #+#             */
+/*   Updated: 2022/05/15 14:41:05 by ahocine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strlen(const char *str)
+void	ft_strcat(char *dest, char *src)
 {
-	int	i;
+	int		i;
+	int		j;
 
+	if (!src || !dest)
+		return ;
 	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
+	while (dest[i])
 		i++;
-	return (i);
+	j = 0;
+	while (src[j])
+	{
+		dest[i + j] = src[j];
+		j++;
+	}
+	dest[i + j] = 0;
 }

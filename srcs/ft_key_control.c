@@ -34,6 +34,10 @@ void	ft_error(t_sl *sl, int code)
 		ft_putstr_fd("Caractere invalide trouve.\n", _STD_ERR);
 	else if (code == 9)
 		ft_putstr_fd("Le fichier n'a pas pu etre ouvert\n", _STD_ERR);
+	else if (code == 10)
+		ft_putstr_fd("Espace memoire insuffisant.\n", _STD_ERR);
+	else if (code == 11)
+		ft_putstr_fd("Ouverture de la map echouee.\n", _STD_ERR);
 	ft_close_cross(sl);
 }
 

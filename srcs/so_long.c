@@ -50,12 +50,12 @@ void	ft_init_resol(t_sl *sl)
 	mlx_get_screen_size(sl->mlx_ptr, &max_x, &max_y);
 	if (sl->resol.height > max_y)
 	{
-		ft_putstr_fd("Resolution trop grande. Redimentionnement.\n", _STD_OUT);
+		ft_putstr_fd("Hauteur de la fenetre trop grande.\n", _STD_OUT);
 		sl->resol.height = max_y;
 	}
 	if (sl->resol.width > max_x)
 	{
-		ft_putstr_fd("Resolution trop grande. Redimentionnement.\n", _STD_OUT);
+		ft_putstr_fd("Largeur de la fenetre trop grande.\n", _STD_OUT);
 		sl->resol.width = max_x;
 	}
 }
@@ -80,15 +80,10 @@ void	ft_size_map(int fd, t_sl *sl)
 void	ft_fill_map(int fd, t_sl *sl)
 {
 	char	*line;
-	int		i;
 	int		y;
 
-	line = NULL;
-	i = 0;
-	sl->map.map = (char **)malloc(sizeof(char *) * (sl->map.longu + 1));
-	while (i < sl->map.longu)
-		sl->map.map[i++] = (char *)malloc(sizeof(char) * (sl->map.large + 1));
 	line = get_next_line(fd);
+	ft_malloc_map(sl);
 	while (line && *line && *line != '\n')
 	{
 		if (ft_strlen(line) - 1 != sl->map.large)
@@ -126,6 +121,8 @@ int	main(int argc, char **argv)
 	ft_size_map(fd, &sl);
 	close(fd);
 	fd = open(*argv, O_RDONLY);
+	if (fd == -1)
+		ft_error(&sl, 11);
 	ft_fill_map(fd, &sl);
 	close(fd);
 	ft_start_game(&sl);

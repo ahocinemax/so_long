@@ -38,6 +38,7 @@ typedef struct s_list
 /*	Mandatory		*/
 void	ft_bzero(void *b, size_t len);
 int		ft_strlen(const char *str);
+void	ft_strcat(char *dest, char *src);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *nb);
 char	*ft_substr(char const *s, unsigned int start, size_t len);

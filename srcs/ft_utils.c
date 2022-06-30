@@ -39,6 +39,14 @@ static void	ft_pixel(t_pixel *pixel)
 	pixel->case_w = 0;
 }
 
+void	ft_init_draw(t_sl *sl)
+{
+	sl->iend.case_w = sl->resol.width / 3;
+	sl->iend.case_h = sl->resol.height / 3;
+	sl->el.case_h = sl->resol.height / sl->map.longu;
+	sl->el.case_w = sl->resol.width / sl->map.large;
+}
+
 static void	ft_draw(t_draw *draw)
 {
 	draw->txture_x = 0;
@@ -70,6 +78,6 @@ void	ft_init_struct2(t_sl *sl)
 	ft_texture(&sl->bg);
 	ft_texture(&sl->door1);
 	ft_texture(&sl->door2);
-	sl->resol.height = 1080;
-	sl->resol.width = 1920;
+	sl->resol.height = 600;
+	sl->resol.width = 600;
 }

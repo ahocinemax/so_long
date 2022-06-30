@@ -14,7 +14,7 @@
 
 int	ft_play(t_sl *sl)
 {
-	if (!sl->win && !sl->loose && sl->pv && sl->nb_move <= 70)
+	if (!sl->win && !sl->loose && sl->pv && sl->nb_move <= 65)
 	{
 		ft_put_elements(sl);
 		ft_up_down(sl);
@@ -51,40 +51,37 @@ void	ft_search_player(t_sl *sl)
 	}
 }
 
-void	ft_init_draw(t_sl *sl)
+static void	ft_fill_struct(t_sl *sl, t_texture *texture, char *path_to_file)
 {
-	sl->iend.case_w = sl->resol.width / 3;
-	sl->iend.case_h = sl->resol.height / 3;
-	sl->el.case_h = sl->resol.height / sl->map.longu;
-	sl->el.case_w = sl->resol.width / sl->map.large;
+	int	fd1;
+	int	fd2;
+
+	fd1 = open(path_to_file, __O_DIRECTORY);
+	fd2 = open(path_to_file, O_RDONLY);
+	if (fd1 > -1)
+		close(fd1);
+	if (fd2 > -1)
+		close(fd2);
+	if (fd1 != -1 || fd2 == -1)
+	{
+		ft_putstr_fd(path_to_file, _STD_ERR);
+		ft_putstr_fd(" introuvable", _STD_ERR);
+		ft_error(sl, 10);
+	}
+	texture->img.img = mlx_xpm_file_to_image(sl->mlx_ptr, path_to_file, \
+		&texture->width, &texture->height);
+	texture->img.address = mlx_get_data_addr(texture->img.img, \
+		&texture->img.bpx, &texture->img.line_l, &texture->img.endian);
 }
 
 void	ft_init_texture(t_sl *sl)
 {
-	sl->game.img.img = mlx_xpm_file_to_image(sl->mlx_ptr, "./img/player.xpm", \
-		&sl->game.width, &sl->game.height);
-	sl->game.img.address = mlx_get_data_addr(sl->game.img.img, \
-		&sl->game.img.bpx, &sl->game.img.line_l, &sl->game.img.endian);
-	sl->wall.img.img = mlx_xpm_file_to_image(sl->mlx_ptr, "./img/wall.xpm", \
-		&sl->wall.width, &sl->wall.height);
-	sl->wall.img.address = mlx_get_data_addr(sl->wall.img.img, \
-		&sl->wall.img.bpx, &sl->wall.img.line_l, &sl->wall.img.endian);
-	sl->door1.img.img = mlx_xpm_file_to_image(sl->mlx_ptr, "./img/door1.xpm", \
-		&sl->door1.width, &sl->door1.height);
-	sl->door1.img.address = mlx_get_data_addr(sl->door1.img.img, \
-		&sl->door1.img.bpx, &sl->door1.img.line_l, &sl->door1.img.endian);
-	sl->col.img.img = mlx_xpm_file_to_image(sl->mlx_ptr, "./img/col.xpm", \
-		&sl->col.width, &sl->col.height);
-	sl->col.img.address = mlx_get_data_addr(sl->col.img.img, \
-		&sl->col.img.bpx, &sl->col.img.line_l, &sl->col.img.endian);
-	sl->door2.img.img = mlx_xpm_file_to_image(sl->mlx_ptr, "./img/door2.xpm", \
-		&sl->door2.width, &sl->door2.height);
-	sl->door2.img.address = mlx_get_data_addr(sl->door2.img.img, \
-		&sl->door2.img.bpx, &sl->door2.img.line_l, &sl->door2.img.endian);
-	sl->bg.img.img = mlx_xpm_file_to_image(sl->mlx_ptr, "./img/bg.xpm", \
-		&sl->bg.width, &sl->bg.height);
-	sl->bg.img.address = mlx_get_data_addr(sl->bg.img.img, \
-		&sl->bg.img.bpx, &sl->bg.img.line_l, &sl->bg.img.endian);
+	ft_fill_struct(sl, &sl->game, "./img/player.xpm");
+	ft_fill_struct(sl, &sl->wall, "./img/wall.xpm");
+	ft_fill_struct(sl, &sl->door1, "./img/door1.xpm");
+	ft_fill_struct(sl, &sl->door2, "./img/door2.xpm");
+	ft_fill_struct(sl, &sl->col, "./img/col.xpm");
+	ft_fill_struct(sl, &sl->bg, "./img/bg.xpm");
 }
 
 void	ft_start_game(t_sl *sl)
