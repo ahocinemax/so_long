@@ -73,12 +73,18 @@ int	ft_key_control2(int key, t_sl *sl)
 
 void	ft_destroy_texture(t_sl *sl)
 {
-	mlx_destroy_image(sl->mlx_ptr, sl->game.img.img);
-	mlx_destroy_image(sl->mlx_ptr, sl->wall.img.img);
-	mlx_destroy_image(sl->mlx_ptr, sl->door1.img.img);
-	mlx_destroy_image(sl->mlx_ptr, sl->col.img.img);
-	mlx_destroy_image(sl->mlx_ptr, sl->door2.img.img);
-	mlx_destroy_image(sl->mlx_ptr, sl->bg.img.img);
+	if (sl->game.img.img)
+		mlx_destroy_image(sl->mlx_ptr, sl->game.img.img);
+	if (sl->wall.img.img)
+		mlx_destroy_image(sl->mlx_ptr, sl->wall.img.img);
+	if (sl->door1.img.img)
+		mlx_destroy_image(sl->mlx_ptr, sl->door1.img.img);
+	if (sl->col.img.img)
+		mlx_destroy_image(sl->mlx_ptr, sl->col.img.img);
+	if (sl->door2.img.img)
+		mlx_destroy_image(sl->mlx_ptr, sl->door2.img.img);
+	if (sl->bg.img.img)
+		mlx_destroy_image(sl->mlx_ptr, sl->bg.img.img);
 }
 
 int	ft_close_cross(t_sl *sl)
@@ -96,8 +102,7 @@ int	ft_close_cross(t_sl *sl)
 	}
 	if (sl->win == 1 || sl->loose == 1)
 		mlx_destroy_image(sl->mlx_ptr, sl->img.img);
-	if (sl->bg.img.img)
-		ft_destroy_texture(sl);
+	ft_destroy_texture(sl);
 	if (sl->mlx_ptr && sl->win_ptr)
 		mlx_destroy_window(sl->mlx_ptr, sl->win_ptr);
 	if (sl->mlx_ptr)

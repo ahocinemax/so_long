@@ -65,8 +65,8 @@ static void	ft_fill_struct(t_sl *sl, t_texture *texture, char *path_to_file)
 	if (fd1 != -1 || fd2 == -1)
 	{
 		ft_putstr_fd(path_to_file, _STD_ERR);
-		ft_putstr_fd(" introuvable", _STD_ERR);
-		ft_error(sl, 10);
+		ft_putstr_fd(" introuvable.\n", _STD_ERR);
+		ft_error(sl, 11);
 	}
 	texture->img.img = mlx_xpm_file_to_image(sl->mlx_ptr, path_to_file, \
 		&texture->width, &texture->height);
