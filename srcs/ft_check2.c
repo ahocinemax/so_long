@@ -27,3 +27,21 @@ void	ft_malloc_map(t_sl *sl)
 			ft_error(sl, 10);
 	}
 }
+
+int	ft_check_fd(t_sl *sl, char *path_to_file)
+{
+	int	fd1;
+	int	fd2;
+
+	fd1 = open(path_to_file, __O_DIRECTORY);
+	fd2 = open(path_to_file, O_RDONLY);
+	if (fd1 > -1)
+		close(fd1);
+	if (fd1 != -1 || fd2 == -1)
+	{
+		ft_putstr_fd(path_to_file, _STD_ERR);
+		ft_putstr_fd(" introuvable.\n", _STD_ERR);
+		ft_error(sl, 11);
+	}
+	return (fd2);
+}

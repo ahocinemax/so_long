@@ -138,6 +138,7 @@ int		ft_get_pxl_color(t_texture *txture, int x, int y);
 int		ft_freeze_player(t_sl *solong, int x, int y);
 void	ft_draw_pxl(t_sl *solong, t_texture *txture);
 void	ft_play_rules(t_sl *solong, int x, int y);
+int		ft_check_fd(t_sl *sl, char *path_to_file);
 void	ft_check_args(t_sl *solong, char **argv);
 int		ft_key_control2(int key, t_sl *solong);
 void	ft_error(t_sl *solong, int error_code);
@@ -163,7 +164,6 @@ void	ft_init_draw(t_sl *solong);
 void	ft_init_img(t_sl *solong);
 void	ft_up_down(t_sl *solong);
 void	ft_malloc_map(t_sl *sl);
-int		ft_check_fd(char *file);
 int		ft_play(t_sl *solong);
 int		ft_char_valid(char c);
 
